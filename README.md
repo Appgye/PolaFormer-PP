@@ -1,4 +1,4 @@
-# PolaFormer++: Polarity-Aware Linear Attentionwith Channel-wise Spikiness
+# PolaFormer++: Polarity-Aware Linear Attention with Channel-wise Spikiness
 
 This repo contains the official **PyTorch** code for PolaFormer++.
 
