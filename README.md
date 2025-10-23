@@ -24,7 +24,7 @@ Polarity-aware attention mechanism separates query-key pairs based on their pola
     <img src="figures/pola.png" width= "400">
 </p>
 
-To avoid the pitfalls of subtractive operations, we instead introduce a Polarity Gating Matrix $\mathbf{G}$, a learnable polarity-aware gating matrix to weight the contributions of same-signed and opposite-signed query-key similarities and approximate the subtractive operation in Equation. As shown in Figure, there is a clear negative correlation and value discrepancy between the weights learned in $\mathbf{G}^{\operatorname{s}}$ and $\mathbf{G}^{\operatorname{o}}$
+To avoid the pitfalls of subtractive operations, we instead introduce a Polarity Gating Matrix $\mathbf{G}$, a learnable polarity-aware gating matrix to weight the contributions of same-signed and opposite-signed query-key similarities and approximate the subtractive operation in Equation. As shown in Figure, there is a clear negative correlation and value discrepancy between the weights learned in $\mathbf{G}^{s}$ and $\mathbf{G}^{o}$
 
 <p align="center">
     <img src="figures/pcaG.png" width= "600">
