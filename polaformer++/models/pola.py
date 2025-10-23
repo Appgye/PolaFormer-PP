@@ -10,7 +10,6 @@ import time
 from einops import rearrange
 from einops.layers.torch import Rearrange
 from typing import Tuple
-from fbi_la.ops.simple_la.attention import simple_la as linear_attention
 
 class SwishImplementation(torch.autograd.Function):
     @staticmethod
@@ -98,7 +97,7 @@ class LayerNorm2d(nn.Module):
         return x
     
 
-class AddLinearAttention(nn.Module):
+class PolaLinearAttention(nn.Module):
 
     def __init__(self, dim, num_heads):
         super().__init__()
@@ -272,7 +271,7 @@ class Block(nn.Module):
         assert flag in ['l', 'v']
         self.flag = flag
         if flag == 'l':
-            self.attn = AddLinearAttention(embed_dim, num_heads)
+            self.attn = PolaLinearAttention(embed_dim, num_heads)
         else:
             self.attn = VanillaSelfAttention(embed_dim, num_heads)
         self.drop_path = DropPath(drop_path)
@@ -502,6 +501,20 @@ class POLA(nn.Module):
         x = self.head(x).flatten(1)
         return x
 
+@register_model
+def POLA_b0(args=None):
+    model = POLA(
+        embed_dims=[32, 64, 128, 384],
+        depths=[2, 2, 2, 2],
+        num_heads=[1, 2, 4, 12],
+        mlp_ratios=[3.5, 3.5, 3.5, 3.5],
+        drop_path_rate=0.1,
+        projection=2048,
+        layerscales=[True, True, True, True],
+        layer_init_values=[1, 1, 1, 1]
+    )
+    model.default_cfg = _cfg()
+    return model
     
 @register_model
 def POLA_b1(args=None):

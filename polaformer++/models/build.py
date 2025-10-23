@@ -5,13 +5,16 @@
 # Written by Ze Liu
 # --------------------------------------------------------
 
-from .pola import POLA_b1, POLA_b2, POLA_b3, POLA_b4, POLA_b5
+from .pola import POLA_b0, POLA_b1, POLA_b2, POLA_b3, POLA_b4, POLA_b5
 
 
 def build_model(config):
     model_type = config.MODEL.TYPE
 
-    if model_type in ['polab1']:
+    if model_type in ['polab0']:
+        model = eval('POLA_b0()')
+
+    elif model_type in ['polab1']:
         model = eval('POLA_b1()')
 
     elif model_type in ['polab2']:
